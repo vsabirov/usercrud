@@ -1,0 +1,54 @@
+version: '2.18'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      usercrud:
+        ipv4_address: 10.1.0.20
+  
+  frontend:
+    build: ./frontend
+    ports:
+      - "2000:2000"
+    networks:
+      usercrud:
+        ipv4_address: 10.1.0.30
+  
+  database:
+    build: ./database
+    environment:
+      POSTGRES_DB: "usercrud"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "usercruddbpwdprod993"
+    ports:
+      - "5432:5432"
+    volumes:
+      - usercrud_database:/var/lib/postgresql/data
+    networks:
+      usercrud:
+        ipv4_address: 10.1.0.10
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d usercrud"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+networks:
+  usercrud:
+    driver: bridge
+
+    ipam:
+     config:
+       - subnet: 10.1.0.0/16
+         gateway: 10.1.0.1
+
+volumes:
+  usercrud_database:
+    driver: local

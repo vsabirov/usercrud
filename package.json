@@ -1,0 +1,8 @@
+{
+  "name": "usercrud",
+  "version": "0.0.1",
+  "description": "Basic user CRUD",
+  "keywords": ["user", "crud", "nest", "postgres"],
+  "author": "vsabirov",
+  "license": "MIT"
+}
