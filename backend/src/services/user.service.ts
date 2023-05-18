@@ -93,4 +93,28 @@ export class UserService {
     this.usersRepository.save(user)
     this.usersRepository.save(friend)
   }
+
+  async removeFriend(id: number, friendId: number) {
+    const user = await this.usersRepository.findOne({
+      where: {
+        id 
+      },
+
+      relations: {
+        friends: true
+      }
+    })
+
+    if(!user) {
+      return
+    }
+
+    if(user.friends) {
+      user.friends = user.friends.filter(friend => {
+        return friend.id !== friendId
+      })
+    }
+
+    this.usersRepository.save(user)
+  }
 }

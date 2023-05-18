@@ -83,7 +83,31 @@ export class GroupService {
     else {
       group.users.push(user)
     }
-    
+
+    this.groupsRepository.save(group)
+  }
+
+  async removeUser(id: number, userId: number) {
+    const group = await this.groupsRepository.findOne({ 
+      where: {
+        id
+      },
+
+      relations: {
+        users: true
+      }
+    })
+
+    if(!group) {
+      return
+    }
+
+    if(group.users) {
+      group.users = group.users.filter(user => {
+        return user.id !== userId
+      })
+    }
+
     this.groupsRepository.save(group)
   }
 }

@@ -21,6 +21,11 @@ export class UserController {
     this.userService.addFriend(id, model.friendId)
   }
 
+  @Delete(':id/friend')
+  removeFriend(@Param('id') id: number, @Body() model: UserRelateFriendModel) {
+    this.userService.removeFriend(id, model.friendId)
+  }
+
   @Get(':id')
   get(@Param('id') id: number) {
     return this.userService.get(id)

@@ -26,6 +26,11 @@ export class GroupController {
     this.groupService.addUser(id, model.userId)
   }
 
+  @Delete(':id/user')
+  removeUser(@Param('id') id: number, @Body() model: GroupRelateUserModel) {
+    this.groupService.removeUser(id, model.userId)
+  }
+
   @Patch(':id')
   update(@Param('id') id: number, @Body() model: GroupUpdateModel) {
     this.groupService.update(id, model)
