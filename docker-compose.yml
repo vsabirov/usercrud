@@ -9,6 +9,9 @@ services:
       - DB_USER=root
       - DB_PASSWORD=usercruddbpwdprod993
       - DB_NAME=usercrud
+
+      - RMQ_ADDRESS=amqp://10.1.0.40:5672
+      - RMQ_QUEUE=usercrud
     ports:
       - "3000:3000"
     depends_on:
@@ -46,6 +49,17 @@ services:
       retries: 5
       start_period: 10s
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - usercrud_rabbitmq:/var/lib/rabbitmq
+    networks:
+      usercrud:
+        ipv4_address: 10.1.0.40
+
 networks:
   usercrud:
     driver: bridge
@@ -57,4 +71,6 @@ networks:
 
 volumes:
   usercrud_database:
+    driver: local
+  usercrud_rabbitmq:
     driver: local

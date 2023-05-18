@@ -109,12 +109,33 @@ export class UserService {
       return
     }
 
+    const friend = await this.usersRepository.findOne({
+      where: {
+        id: friendId 
+      },
+
+      relations: {
+        friends: true
+      }
+    })
+
+    if(!friend) {
+      return
+    }
+
     if(user.friends) {
       user.friends = user.friends.filter(friend => {
         return friend.id !== friendId
       })
     }
 
+    if(friend.friends) {
+      friend.friends = friend.friends.filter(otherFriend => {
+        return otherFriend.id !== id
+      })
+    }
+
     this.usersRepository.save(user)
+    this.usersRepository.save(friend)
   }
 }

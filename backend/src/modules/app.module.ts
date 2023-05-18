@@ -3,6 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { UserModule, GroupModule } from '.';
 import { User, Group } from '../entities'
+import { GraphQLModule } from '@nestjs/graphql';
+
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
+import { join } from 'node:path';
 
 @Module({
   imports: [
@@ -18,6 +22,11 @@ import { User, Group } from '../entities'
       database: process.env.DB_NAME ?? 'usercrud',
       entities: [User, Group],
       synchronize: true
+    }),
+
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql')
     })
   ],
 })
