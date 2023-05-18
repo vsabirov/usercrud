@@ -20,6 +20,10 @@ const App = () => {
           <GroupPanel />
         </section>
       </main>
+
+      <footer>
+        <h3><a href="http://localhost:3000/graphql">Песочница GraphQL</a></h3>
+      </footer>
     </>
   )
 }
