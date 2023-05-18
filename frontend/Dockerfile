@@ -13,4 +13,6 @@ ADD src public ./
 
 RUN pnpm run build
 
+EXPOSE 2000
+
 CMD ["pnpm run start"]

@@ -3,6 +3,12 @@ version: '2.18'
 services:
   backend:
     build: ./backend
+    environment:
+      - DB_HOST=10.1.0.10
+      - DB_PORT=5432
+      - DB_USER=root
+      - DB_PASSWORD=usercruddbpwdprod993
+      - DB_NAME=usercrud
     ports:
       - "3000:3000"
     depends_on:
