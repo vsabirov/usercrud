@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { CREATE_GROUP } from "../../api/group/create";
+import { CREATE_GROUP } from "../../api";
 
 const GroupForm = ({ onCreated }) => {
   const [newGroup] = useMutation(CREATE_GROUP)
@@ -32,7 +32,7 @@ const GroupForm = ({ onCreated }) => {
       <span>Название группы</span>
       &nbsp;&nbsp;&nbsp;
       <input type="text" value={name} onChange={e => setName(e.target.value)} />
-      <br />
+      <br /><br />
       <span>Разрешения группы</span>
       &nbsp;&nbsp;&nbsp;
       <input type="text" value={permissions} onChange={e => setPermissions(e.target.value)} />

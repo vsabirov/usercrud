@@ -1,20 +1,9 @@
 import React from "react";
 import { useMutation } from "@apollo/client";
-import { DELETE_GROUP } from "../../api/group/delete";
 
-const GroupList = ({ groups, loading, onUpdate }) => {
-  const [removeGroup] = useMutation(DELETE_GROUP)
-
+const GroupList = ({ groups, loading, getActionsForGroup }) => {
   if(loading) {
     return <h1>Загрузка...</h1>
-  }
-
-  const deleteGroup = (id) => {
-    removeGroup({
-      variables: {
-        id: id
-      }
-    }).then(_ => onUpdate())
   }
 
   return (
@@ -40,7 +29,7 @@ const GroupList = ({ groups, loading, onUpdate }) => {
               ))}
             </td>
             <td>
-              <button onClick={() => deleteGroup(group.id)}>Удалить</button>
+                {getActionsForGroup(group)}
             </td>
           </tr>
         ))}

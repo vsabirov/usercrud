@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { CREATE_USER } from "../../api/user/create";
+import { CREATE_USER } from "../../api";
 
 const UserForm = ({ onCreated }) => {
   const [newUser] = useMutation(CREATE_USER)

@@ -1,20 +1,8 @@
 import React from "react";
-import { DELETE_USER } from "../../api/user/delete";
-import { useMutation } from "@apollo/client";
 
-const UserList = ({ users, loading, onUpdate }) => {
-  const [removeUser] = useMutation(DELETE_USER)
-
+const UserList = ({ users, loading, getActionsForUser }) => {
   if(loading) {
     return <h1>Загрузка...</h1>
-  }
-
-  const deleteUser = (id) => {
-    removeUser({
-      variables: {
-        id: id
-      }
-    }).then(_ => onUpdate())
   }
 
   return (
@@ -44,7 +32,7 @@ const UserList = ({ users, loading, onUpdate }) => {
               ))}
             </td>
             <td>
-              <button onClick={() => deleteUser(user.id)}>Удалить</button>
+                {getActionsForUser(user)}
             </td>
           </tr>
         ))}
