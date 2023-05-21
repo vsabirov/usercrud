@@ -8,13 +8,13 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() model: UserCreationModel) {
-    this.userService.create(model)
+  async create(@Body() model: UserCreationModel) {
+    return await this.userService.create(model)
   }
 
   @Get()
-  getAll() {
-    return this.userService.getAll()
+  async getAll() {
+    return await this.userService.getAll()
   }
 
   @Post(':id/friend')
@@ -28,18 +28,18 @@ export class UserController {
   }
 
   @Get(':id')
-  get(@Param('id') id: number) {
-    return this.userService.get(id)
+  async get(@Param('id') id: number) {
+    return await this.userService.get(id)
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() model: UserUpdateModel) {
-    this.userService.update(id, model)
+  async update(@Param('id') id: number, @Body() model: UserUpdateModel) {
+    return await this.userService.update(id, model)
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    this.userService.remove(id)
+  async remove(@Param('id') id: number) {
+    return await this.userService.remove(id)
   }
 
   @MessagePattern({cmd: 'user-create'})

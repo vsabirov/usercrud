@@ -75,7 +75,7 @@ const UserEdit = ({ activeUser, users, onEdit }) => {
       <button onClick={() => deleteUser(activeUser.id)}>Удалить</button>
       <br /><br />
 
-      <UserList users={users} loading={false} getActionsForUser={(user) => {
+      <UserList users={users.filter(user => user.id !== activeUser.id)} loading={false} getActionsForUser={(user) => {
           let isFriend = false
           activeUser.friends.forEach(friend => {
             if(friend.username == user.username) {

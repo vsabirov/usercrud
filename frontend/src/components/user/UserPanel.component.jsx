@@ -1,39 +1,37 @@
 import React, { useEffect, useState } from "react";
 
 import { UserForm, UserList, UserEdit } from ".";
-import { useQuery } from "@apollo/client";
-import { GET_ALL_USERS } from "../../api";
 
-const UserPanel = () => {
-  const {data, loading, error, refetch} = useQuery(GET_ALL_USERS)
-  const [users, setUsers] = useState([])
+const UserPanel = ({ users, loading, refetchAll }) => {
   const [activeUser, setActiveUser] = useState(null)
   const [shouldResetActiveUser, setShouldResetActiveUser] = useState(false)
 
   useEffect(() => {
-    if(!loading) {
-      setUsers(data.getAllUsers)
+    if(shouldResetActiveUser && activeUser) {
+      const newActiveUser = users.find(user => user.id == activeUser.id)
 
-      if(shouldResetActiveUser && activeUser) {
-        const newActiveUser = data.getAllUsers.find(user => user.id == activeUser.id)
-
-        setActiveUser(newActiveUser)
-      }
+      setActiveUser(newActiveUser)
     }
-  }, [data])
+  }, [users])
 
   return (
     <>
-      <UserForm onCreated={() => refetch()} />
+      <h2>Пользователи</h2>
+
+      <UserForm onCreated={() => { 
+        setTimeout(() => refetchAll(), 200) 
+      }}
+      />
       <br /><br />
 
       <UserList users={users} loading={loading} getActionsForUser={(user) => (
           <button onClick={() => setActiveUser(user)}>Редактировать</button>
         )
       } />
+      <br /><br />
 
       <UserEdit activeUser={activeUser} users={users} onEdit={(reset) => {
-        refetch()
+        setTimeout(() => refetchAll(), 200)
 
         if(reset) {
           setShouldResetActiveUser(true)

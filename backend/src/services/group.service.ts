@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Group, User } from '../entities';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm';
 import { GroupCreationModel, GroupUpdateModel } from 'src/models';
 
 @Injectable()
@@ -34,18 +34,18 @@ export class GroupService {
     })
   }
 
-  remove(id: number) {
-    this.groupsRepository.delete(id)
+  remove(id: number): Promise<DeleteResult> {
+    return this.groupsRepository.delete(id)
   }
 
-  create(model: GroupCreationModel) {
-    this.groupsRepository.insert({
+  create(model: GroupCreationModel): Promise<InsertResult> {
+    return this.groupsRepository.insert({
       ...model
     })
   }
 
-  update(id: number, model: GroupUpdateModel) {
-    this.groupsRepository.update({ id }, { ...model })
+  update(id: number, model: GroupUpdateModel): Promise<UpdateResult> {
+    return this.groupsRepository.update({ id }, { ...model })
   }
 
   async addUser(id: number, userId: number) {

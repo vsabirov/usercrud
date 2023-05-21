@@ -21,11 +21,15 @@ export class User {
   @Field()
   username: string;
 
-  @ManyToMany(type => User, (user) => user.friends) @JoinTable()
+  @ManyToMany(type => User, (user) => user.friends, {
+    onDelete: 'CASCADE'
+  }) @JoinTable()
   @Field(type => [User])
   friends: User[];
 
-  @ManyToMany(type => Group, (group) => group.users)
+  @ManyToMany(type => Group, (group) => group.users, {
+    onDelete: 'CASCADE'
+  })
   @Field(type => [Group])
   groups: Group[];
 }

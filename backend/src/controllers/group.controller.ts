@@ -8,18 +8,18 @@ export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
   @Post()
-  create(@Body() model: GroupCreationModel) {
-    this.groupService.create(model)
+  async create(@Body() model: GroupCreationModel) {
+    return await this.groupService.create(model)
   }
 
   @Get()
-  getAll() {
-    return this.groupService.getAll()
+  async getAll() {
+    return await this.groupService.getAll()
   }
 
   @Get(':id')
-  get(@Param('id') id: number) {
-    return this.groupService.get(id)
+  async get(@Param('id') id: number) {
+    return await this.groupService.get(id)
   }
 
   @Post(':id/user')
@@ -33,13 +33,13 @@ export class GroupController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() model: GroupUpdateModel) {
-    this.groupService.update(id, model)
+  async update(@Param('id') id: number, @Body() model: GroupUpdateModel) {
+    return await this.groupService.update(id, model)
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    this.groupService.remove(id)
+  async remove(@Param('id') id: number) {
+    return await this.groupService.remove(id)
   }
 
   @MessagePattern({cmd: 'group-create'})
