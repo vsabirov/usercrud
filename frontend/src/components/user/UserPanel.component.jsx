@@ -25,7 +25,7 @@ const UserPanel = ({ users, loading, refetchAll }) => {
       <br /><br />
 
       <UserList users={users} loading={loading} getActionsForUser={(user) => (
-          <button onClick={() => setActiveUser(user)}>Редактировать</button>
+          <button className='neutral' onClick={() => setActiveUser(user)}>Редактировать</button>
         )
       } />
       <br /><br />

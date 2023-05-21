@@ -25,7 +25,7 @@ const GroupPanel = ({ users, groups, loading, refetchAll }) => {
       <br /><br />
 
       <GroupList groups={groups} loading={loading} getActionsForGroup={(group) => (
-          <button onClick={() => setActiveGroup(group)}>Редактировать</button>
+          <button className='neutral' onClick={() => setActiveGroup(group)}>Редактировать</button>
         )
       } />
       <br /><br />

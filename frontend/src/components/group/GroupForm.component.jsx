@@ -38,7 +38,7 @@ const GroupForm = ({ onCreated }) => {
       <input type="text" value={permissions} onChange={e => setPermissions(e.target.value)} />
       <br /><br />
       <div className="centered">
-        <button onClick={e => createGroup(e)}>Создать</button>
+        <button className='positive' onClick={e => createGroup(e)}>Создать</button>
       </div>
     </form>
   )

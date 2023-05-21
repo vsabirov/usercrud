@@ -65,15 +65,15 @@ const GroupEdit = ({ activeGroup, groups, users, onEdit }) => {
       <p>Сменить имя</p>
       <input type="text" value={newName} onChange={e => setNewName(e.target.value)}/>
       <br /><br />
-      <button onClick={() => changeName(activeGroup.id)}>Отправить</button>
+      <button className='positive' onClick={() => changeName(activeGroup.id)}>Отправить</button>
 
       <ul>
         <li>ID: {activeGroup.id}</li>
         <li>Разрешения: {activeGroup.permissions}</li>
-        <li>Пользователи: {activeGroup.users.map(user => user.username)}</li>
+        <li>Пользователи: {activeGroup.users.map(user => user.username + ' ')}</li>
       </ul>
 
-      <button onClick={() => deleteGroup(activeGroup.id)}>Удалить</button>
+      <button className='negative' onClick={() => deleteGroup(activeGroup.id)}>Удалить</button>
       <br /><br />
 
       <UserList users={users} loading={false} getActionsForUser={(user) => {
@@ -85,10 +85,10 @@ const GroupEdit = ({ activeGroup, groups, users, onEdit }) => {
           })
 
           if(isUser) {
-            return <button onClick={() => unmakeUser(user)}>Удалить из группы</button>
+            return <button className='negative' onClick={() => unmakeUser(user)}>Удалить из группы</button>
           }
           else {
-            return <button onClick={() => makeUser(user)}>Добавить в группу</button>
+            return <button className='positive' onClick={() => makeUser(user)}>Добавить в группу</button>
           }
         }
       }/>

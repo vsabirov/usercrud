@@ -7,12 +7,12 @@ import { MessagePattern, Payload } from '@nestjs/microservices';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('create')
   async create(@Body() model: UserCreationModel) {
     return await this.userService.create(model)
   }
 
-  @Get()
+  @Get('all')
   async getAll() {
     return await this.userService.getAll()
   }
@@ -32,12 +32,12 @@ export class UserController {
     return await this.userService.get(id)
   }
 
-  @Patch(':id')
+  @Patch(':id/update')
   async update(@Param('id') id: number, @Body() model: UserUpdateModel) {
     return await this.userService.update(id, model)
   }
 
-  @Delete(':id')
+  @Delete(':id/delete')
   async remove(@Param('id') id: number) {
     return await this.userService.remove(id)
   }

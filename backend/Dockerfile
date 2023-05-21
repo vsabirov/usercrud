@@ -9,10 +9,10 @@ ADD package.json tsconfig.json tsconfig.build.json ./
 
 RUN pnpm i
 
-ADD src ./
+ADD src/ ./src
 
 RUN pnpm run build
 
 EXPOSE 3000
 
-CMD ["pnpm run start:prod"]
+CMD ["pnpm", "run", "start:prod"]

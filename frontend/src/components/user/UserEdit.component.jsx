@@ -64,15 +64,15 @@ const UserEdit = ({ activeUser, users, onEdit }) => {
       <p>Сменить имя</p>
       <input type="text" value={newUsername} onChange={e => setNewUsername(e.target.value)}/>
       <br /><br />
-      <button onClick={() => changeUserName(activeUser.id)}>Отправить</button>
+      <button className='positive' onClick={() => changeUserName(activeUser.id)}>Отправить</button>
 
       <ul>
         <li>ID: {activeUser.id}</li>
-        <li>Друзья: {activeUser.friends.map(friend => friend.username)}</li>
-        <li>Группы: {activeUser.groups.map(group => group.name)}</li>
+        <li>Друзья: {activeUser.friends.map(friend => friend.username + ' ')}</li>
+        <li>Группы: {activeUser.groups.map(group => group.name + ' ')}</li>
       </ul>
 
-      <button onClick={() => deleteUser(activeUser.id)}>Удалить</button>
+      <button className='negative' onClick={() => deleteUser(activeUser.id)}>Удалить</button>
       <br /><br />
 
       <UserList users={users.filter(user => user.id !== activeUser.id)} loading={false} getActionsForUser={(user) => {
@@ -84,10 +84,10 @@ const UserEdit = ({ activeUser, users, onEdit }) => {
           })
 
           if(isFriend) {
-            return <button onClick={() => unfriend(user)}>Удалить из друзей</button>
+            return <button className='negative' onClick={() => unfriend(user)}>Удалить из друзей</button>
           }
           else {
-            return <button onClick={() => befriend(user)}>Добавить в друзья</button>
+            return <button className='positive' onClick={() => befriend(user)}>Добавить в друзья</button>
           }
         }
       }/>

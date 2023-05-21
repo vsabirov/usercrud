@@ -61,6 +61,18 @@ h2 {
   text-align: center;
 }
 
+.positive {
+  background-color: rgb(169, 251, 166);
+}
+
+.negative {
+  background-color: rgb(255, 194, 194);
+}
+
+.neutral {
+  background-color: rgb(194, 246, 255);
+}
+
 td {
   padding: 12px;
 }

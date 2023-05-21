@@ -7,12 +7,12 @@ import { MessagePattern, Payload } from '@nestjs/microservices';
 export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
-  @Post()
+  @Post('create')
   async create(@Body() model: GroupCreationModel) {
     return await this.groupService.create(model)
   }
 
-  @Get()
+  @Get('all')
   async getAll() {
     return await this.groupService.getAll()
   }
@@ -32,12 +32,12 @@ export class GroupController {
     this.groupService.removeUser(id, model.userId)
   }
 
-  @Patch(':id')
+  @Patch(':id/update')
   async update(@Param('id') id: number, @Body() model: GroupUpdateModel) {
     return await this.groupService.update(id, model)
   }
 
-  @Delete(':id')
+  @Delete(':id/delete')
   async remove(@Param('id') id: number) {
     return await this.groupService.remove(id)
   }

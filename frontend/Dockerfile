@@ -5,14 +5,15 @@ WORKDIR /frontend
 
 RUN npm i -g pnpm
 
-ADD package.json ./
+ADD package.json .env ./
 
 RUN pnpm i
 
-ADD src public ./
+ADD public/ ./public
+ADD src/ ./src
 
 RUN pnpm run build
 
 EXPOSE 2000
 
-CMD ["pnpm run start"]
+CMD ["pnpm", "run", "start"]

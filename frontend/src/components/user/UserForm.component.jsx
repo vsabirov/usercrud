@@ -30,7 +30,7 @@ const UserForm = ({ onCreated }) => {
       <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
       <br /><br />
       <div className="centered">
-        <button onClick={e => createUser(e)}>Зарегистрировать</button>
+        <button className='positive' onClick={e => createUser(e)}>Зарегистрировать</button>
       </div>
     </form>
   )
